@@ -1,6 +1,8 @@
 const mongoose = require("mongoose");
 const db = require("../Models");
-mongoose.connect('mongodb://localhost/myapp')
+
+mongoose.Promise = global.Promise;
+mongoose.connect('mongodb://localhost:27017/myapp',{ useNewUrlParser: true })
 const articleSeed = [
   {
     title: "The Dead Zone",

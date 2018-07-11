@@ -3,10 +3,9 @@ const app = express();
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const routes = require('./Routes');
-const models = require('./Models');
 
 const PORT = process.env.PORT || 3001;
-const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost/myapp';
+const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/myapp';
 
 
 
@@ -20,7 +19,7 @@ if (process.env.NODE_ENV === 'production') {
 app.use(routes);
 
 
-mongoose.connect(MONGODB_URI)
+mongoose.connect(MONGODB_URI,{ useNewUrlParser: true } )
 mongoose.Promise = global.Promise;
 let db = mongoose.connection
 
@@ -32,4 +31,4 @@ db.on('error', console.error.bind(console, 'MongoDB connection error:'))
 
 app.listen(PORT, () => {
   console.log(`App listening on http://localhost:${PORT}`);
-});
+});  
